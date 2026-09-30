@@ -46,19 +46,25 @@ public class Main {
 
 
         //Game loop
+        //will keep going until break
         while (true){
+            //calls the method responsible for the game loop
             gameLoop(scanner);
+            //after gameloop asks user if they want to play again
             System.out.println("Do you want to play again?");
             String keepGoing = scanner.nextLine();
 
+            //if the answer is anything but yes, stop the loop
             if (!keepGoing.equalsIgnoreCase("yes")){
                 break;
             }
         }
 
+        //asks the user if they want to see the hall of fame
         System.out.println("Do you want to see the hall of fame?");
         String shouldPrintRecords = scanner.nextLine();
 
+        //if yes, prints the hall of fame.
         if (shouldPrintRecords.equalsIgnoreCase("yes")){
             records.displayRecords();
         }

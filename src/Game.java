@@ -1,14 +1,20 @@
 import java.util.*;
 
+//class uses to represent a Question
+//works like a struct
 class Question{
+    //constructor for the class, assigns values to variables
+    //constructors are methods called upon instantiation
     public Question(String q, String a){
         this.answer = a;
         this.question = q;
     }
 
+    //pirvate class variables
     private final String answer;
     private final String question;
 
+    //getter methods for variables
     public String getAnswer() {
         return answer;
     }
@@ -20,6 +26,8 @@ class Question{
 
 public class Game {
 
+    //constructor for game
+    //gives values to the questions list upon instantiation
     public Game(){
         generateQuestions();
     }
@@ -27,6 +35,7 @@ public class Game {
 
     public final int LIMIT = 100;
 
+    //the arrays
     private final ArrayList<Question> questions = new ArrayList<>();
     private ArrayList<Integer> pickedQuestions = new ArrayList<>();
 
