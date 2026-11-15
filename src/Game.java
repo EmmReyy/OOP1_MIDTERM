@@ -7,6 +7,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
+import java.text.Normalizer;
 
 //class uses to represent a Question
 //works like a struct
@@ -119,14 +120,35 @@ public class Game {
 
     }
 
+    private String normalizeAnswer(String answer) {
+
+        return Normalizer.normalize(answer, Normalizer.Form.NFD)
+                .replaceAll("\\p{M}", "")
+                .toLowerCase(Locale.ROOT)
+                .replaceAll("[^\\p{L}\\p{N}]+", " ")
+                .trim()
+                .replaceAll("\\s+", " ");
+    }
 
     //take an input answer and compare it to the random answer
     public boolean checkAnswer(String answer){
-        if (answer.equalsIgnoreCase(currentQuestion.getAnswer())) {
-            System.out.println("Correct");
+
+        String userAnswer = normalizeAnswer(answer);
+        String correctAnswer = normalizeAnswer(currentQuestion.getAnswer());
+
+        boolean isCorrect = !userAnswer.isEmpty() && (" " + correctAnswer + " ").contains(" " + userAnswer + " ");
+
+        if (isCorrect) {
+
+            System.out.println("Correct!");
             return true;
+
         } else {
-            System.out.println("Wrong");
+
+            System.out.println("Wrong!");
+            System.out.println(
+                    "Correct answer: " + currentQuestion.getAnswer()
+            );
             return false;
         }
     }
